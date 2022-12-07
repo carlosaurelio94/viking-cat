@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <title>Carrito de compras | VikingCat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container-fluid d-flex gap-2">
+        <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill m-2">
+        <h1 class="text-light logo ">VikingCat</h1>
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 200px;">
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="/juguetes.html">Juguetes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="/farmacia.html">Farmacia</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="/contact.html">Contactanos</a>
+            </li>
+            <li>
+              <a href="#" class="cart m-2"><img src="./img/cart-regular-24.png" alt="" class="cart"><a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+    <main class="d-flex flex-column justify-content-center align-items-center bg-secondary gap-1 main">
+      <section class="d-flex justify-content-center align-items-center bienvenida m-2">
+        <h4 class="display-1">Carrito</h4>
+
+      </section>
+
+      <div v-show="carrito.length > 0" class="text-center">
+        <h4>Total: ${{total}}</h4>
+        <div class="maps"><a href="#modal2"
+            class="clickMap btn btn-warning text-dark fs-5 text-decoration-none rounded-5">Terminar compra</a></div>
+        <form action="">
+        </form>
+      </div>
+      <div class=" d-flex flex-column justify-content-center gap-4 p-2">
+        <div class="card mb-3" style="max-width: 540px;" v-for="elemento in carrito">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img :src="elemento.imagen" class="img-fluid imagenH" :alt="elemento.nombre">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{elemento.nombre}}</h5>
+                <p class="card-text">$ {{elemento.precio}}</p>
+                <div>
+                  <p class="card-text"><small class="text-muted">Unidades en stock: {{elemento.stock}}</small></p>
+
+                  <div>
+                  <p class="card-text text-muted">Unidades en el carrito: <button class="btn btn-primary btn-sm" v-on:click="agregarCarrito(elemento)" v-show="elemento.stock != 0">+</button> {{elemento.cantidad}} <button class="btn btn-danger btn-sm" v-on:click="eliminarUnidad(elemento)" v-show="elemento.cantidad != 1">-</button></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tarjetaCarrito">
+              <button v-on:click="eliminarCarrito(elemento)"
+                class="btn btn-danger position-absolute bottom-0 end-0">Eliminar todas las unidades</button>
+            </div>
+          </div>
+        </div>
+        <h2 v-show="carrito.length == 0" class="p-3">El carrito de compras está vacio</h2>
+
+      </div>
+
+
+
+
+
+
+
+      <div id="modal2" class="modalmask">
+        <div class="modalbox movedown">
+          <a href="#close" title="Close" class="close">X</a>
+          <h3 class="colorss">Seleccione su método de pago</h3>
+          <div class="d-flex flex-wrap gap-2">
+            <div class=""><a href="#modal4" class="clickMap"><img
+                  src="https://chida.tur.ar/wp-content/uploads/2020/01/MERCADOPAGO.png" alt=""></a></div>
+            <div class=""><a href="#modal3" class="clickMap"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97vU_hurRvQOxfEfirvvJK3lFkETbN6u_peCuirju&s"
+                  alt=""></a></div>
+            <div class=""><a href="#modal5" class="clickMap"><img
+                  src="https://img.freepik.com/vector-premium/efectivo-mano-logotipo-empresario-blanco_269543-105.jpg"
+                  alt=""></a></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal3" class="modalmask">
+        <div class="modalbox movedown">
+          <a href="#close" title="Close" class="close">X</a>
+          <form action="" class="p-3 m-2">
+            <fieldset>
+              <label for="tarjeta" class="form-label">N° de tarjeta</label>
+              <input type="number" id="tarjeta" class="form-control" placeholder="0123 4567 8910">
+            </fieldset>
+            <fieldset>
+              <label for="nombre" class="form-label">Nombre del titular (como aparece en la tarjeta)</label>
+              <input type="text" id="nombre" class="form-control" placeholder="Pepito Pérez">
+            </fieldset>
+            <fieldset>
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="number" id="cvv" class="form-control" placeholder="523">
+              <fieldset class="d-flex flex-row">
+                <a href="./index.html" class="p-2 m-4 btn btn-primary" @click="eliminarTodo()">Comprar y volver</a>
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97vU_hurRvQOxfEfirvvJK3lFkETbN6u_peCuirju&s"
+                  alt="">
+
+              </fieldset>
+              <p class="text-danger">**Al terminar la compra, volvés a Inicio.</p>
+            </form>
+          </div>
+      </div>
+
+      <div id="modal4" class="modalmask">
+        <div class="modalbox movedown p-3">
+          <a href="#close" title="Close" class="close">X</a>
+          <form action="" class="p-3 m-2">
+            <fieldset>
+              <label for="telefono" class="form-label">N° de telefono</label>
+              <input type="number" id="telefono" class="form-control" placeholder="012 3456 78 98">
+            </fieldset>
+            <fieldset>
+              <label for="email2" class="form-label">Email</label>
+              <input type="email" id="email2" class="form-control" placeholder="pepitoperez@gmail.com">
+            </fieldset>
+            <fieldset>
+              <label for="fecha" class="form-label">Fecha de nacimiento</label>
+              <input type="date" id="fecha" class="form-control" placeholder="523">
+            </fieldset>
+            <fieldset class="d-flex flex-row m-2">
+              <a href="./index.html" class="p-2 m-4 btn btn-primary" @click="eliminarTodo()">Comprar y volver</a>
+              <img src="https://chida.tur.ar/wp-content/uploads/2020/01/MERCADOPAGO.png" alt="">
+            </fieldset>
+            <p class="text-danger">**Al terminar la compra, volvés a Inicio.</p>
+          </form>
+        </div>
+      </div>
+
+      <div id="modal5" class="modalmask">
+        <div class="modalbox movedown p-1">
+          <a href="#close" title="Close" class="close">X</a>
+          <form action="" class="">
+            <fieldset>
+              <label for="nombre2" class="form-label">Nombre y apellido</label>
+              <input type="text" id="nombre2" class="form-control" placeholder="Pepito Pérez">
+            </fieldset>
+            <fieldset>
+              <label for="telefono" class="form-label">N° de telefono</label>
+              <input type="number" id="telefono" class="form-control" placeholder="012 3456 78 98">
+            </fieldset>
+
+            <fieldset>
+              <label for="comprobante" class="form-label">Numero de comprobante de la oficina más cercana</label>
+              <input type="password" id="comprobante" class="form-control" placeholder="1225 222222478 52">
+            </fieldset>
+
+            </fieldset>
+            <fieldset class="d-flex flex-row">
+              <a href="./index.html" class="p-2 m-4 btn btn-primary" @click="eliminarTodo()">Comprar y volver</a>
+              <img src="https://img.freepik.com/vector-premium/efectivo-mano-logotipo-empresario-blanco_269543-105.jpg"
+                alt="">
+            </fieldset>
+            <div class="m-4">
+              <p class="text-danger">**Al terminar la compra, volvés a Inicio.</p>
+            </form>
+          </form>
+        </div>
+      </div>
+
+  </div>
+  <div id="modal" class="modalmask">
+    <div class="modalbox movedown">
+      <a href="#close" title="Close" class="close">X</a>
+      <iframe class="mapa yeager"></iframe>
+    </div>
+  </div>
+
+  </main>
+
+  <!--FOOTER-->
+  <footer class="bg-warning d-flex justify-content-between align-items-center gap-1 p-2">
+    <!-- <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill"> -->
+    <nav class="nav redes d-flex ">
+      <a class="nav-link" href="https://www.facebook.com" target="_blank"><img src="./img/facebook_pet.shop.png"
+          class="nav-link-img" alt="Logo de Facebook" class="fbLogo"></a>
+      <a class="nav-link" href="https://www.instagram.com" target="_blank"><img src="./img/instagram_pet.shop.png"
+          class="nav-link-img" alt="" class="igLogo"></a>
+      <a class="nav-link" href="https://www.whatsapp.com" target="_blank"><img src="./img/whatsapp_pet.shop.png"
+          class="nav-link-img" alt="" class="wsLogo"></a>
+    </nav>
+    <p class="text-muted">VikingCat® marca registrada</p>
+    <fieldset class="d-flex gap-2">
+      <label for="email">Suscribite:</label>
+      <input type="email" name="email" id="email" class="form-control mb-2" placeholder="petshop@vikingcat.com">
+    </fieldset>
+  </footer>
+
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <script src="./index.js"></script>
+</body>
+
+</html>

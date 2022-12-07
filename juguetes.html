@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <title>Juguetes | VikingCat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    {{filtroChecksJ}}
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container-fluid d-flex gap-2">
+        <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill m-2">
+        <h1 class="text-light logo ">VikingCat</h1>
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 200px;">
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Juguetes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="/farmacia.html">Farmacia</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="/contact.html">Contactanos</a>
+            </li>
+            <li>
+              <a href="./carrito.html" class="cart m-2"><img src="./img/cart-regular-24.png" alt="" class="cart"><a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    <main class="d-flex flex-column justify-content-center align-items-center bg-secondary gap-2 main">
+
+
+      <div class="d-flex justify-content-around align-items-center m-2">
+        <img src="./img/perro-juguetes.jpeg" class="rounded-pill imagenS" alt="">
+        <section class="d-flex justify-content-around align-items-center bienvenida m-2">
+          <h4 class="display-1">Juguetes</h4>
+        </section>
+        <img src="./img/perro-juguetes.jpeg" class="rounded-pill imagenS" alt="">
+      </div>
+
+      <div class="checkColum d-flex justify-content-center align-items-center m-3 gap-5">
+        <fieldset class="d-flex align-items-center gap-4 fw-bolder">
+          <label for="hasta" class="text-light">Hasta $500
+            <input v-model="checksMenos" type="checkbox" value="500" name="hasta" id="hasta">
+          </label>
+          <label for="desde" class="text-light"> desde $500
+            <input v-model="checksMas" type="checkbox" value="500" name="desde" id="desde">
+          </label>
+          <label for="search" class="d-flex gap-2">
+            <input v-model="textoIngresado" type="search" id="search" placeholder="Productos..." class="buscar p-2 m-2">
+          </label>
+        </fieldset>
+      </div>
+
+      <div class=" d-flex flex-row flex-wrap justify-content-center gap-4 p-2">
+        <div class="card" style="width: 18rem;" v-for="juguete in juguetes">
+          <img :src="juguete.imagen" class="card-img-top tarjeta" :alt="juguete.nombre">
+          <div class="card-body">
+            <h5 class="card-title">{{juguete.nombre}}</h5>
+            <p class="card-text">{{juguete.descripcion}}</p>
+            <p class="card-text">$ {{juguete.precio}}</p>
+            <p v-show="juguete.stock <= 5 && juguete.stock > 0" id="ultimas">ULTIMAS UNIDADES</p>
+            <div class="p-4">
+              <a v-show="juguete.stock > 0" v-on:click="agregarCarrito(juguete)"
+                class="btn btn-primary position-absolute bottom-0 end-0 m-2">Agregar al carrito</a>
+              <a v-show="juguete.stock <= 0" v-on:click="agregarCarrito(juguete)"
+                class="btn btn-danger position-absolute bottom-0 end-0 m-2">Producto fuera de stock</a>
+            </div>
+          </div>
+        </div>
+        <h2 v-show="juguetes.length == 0" class="p-3">No tenemos coincidencias con tu busqueda, por favor ajustá los
+          filtros o realiza una nueva busqueda.</h2>
+      </div>
+
+
+    </main>
+  </div>
+
+
+  <!--FOOTER-->
+  <footer class="bg-warning d-flex justify-content-between align-items-center gap-1 p-2">
+    <!-- <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill"> -->
+    <nav class="nav redes d-flex ">
+      <a class="nav-link" href="https://www.facebook.com" target="_blank"><img src="./img/facebook_pet.shop.png"
+          class="nav-link-img" alt="Logo de Facebook" class="fbLogo"></a>
+      <a class="nav-link" href="https://www.instagram.com" target="_blank"><img src="./img/instagram_pet.shop.png"
+          class="nav-link-img" alt="" class="igLogo"></a>
+      <a class="nav-link" href="https://www.whatsapp.com" target="_blank"><img src="./img/whatsapp_pet.shop.png"
+          class="nav-link-img" alt="" class="wsLogo"></a>
+    </nav>
+    <p class="text-muted">VikingCat® marca registrada</p>
+    <fieldset class="d-flex gap-2">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" class="form-control mb-2" placeholder="petshop@VikingCat.com">
+    </fieldset>
+  </footer>
+
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Contactanos | VikingCat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container-fluid d-flex gap-2">
+              <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill m-2">
+              <h1 class="text-light logo ">VikingCat</h1>
+      
+              <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 200px;">
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="index.html">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/juguetes.html">Juguetes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/farmacia.html">Farmacia</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">Contactanos</a>
+                  </li>
+                  <li>
+                    <a href="carrito.html" class="cart m-2"><img src="./img/cart-regular-24.png" alt="" class="cart" ><a>
+                  </li>
+                </ul>
+                
+              </div>
+              
+            </div>
+          </nav>
+        <main class="d-flex flex-column justify-content-center align-items-center bg-secondary gap-3">
+            
+
+            <section class="d-flex justify-content-center align-items-center bienvenida m-2">
+                <h4 class="display-1">Contáctanos</h4>
+            </section>
+
+            <form action="" class="d-flex flex-column col-6 gap-1" >
+                <fieldset>
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre">
+                </fieldset>
+                <fieldset>
+                    <label for="apellido" class="form-label">Apellido:</label>
+                    <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido">
+                </fieldset>
+                <fieldset>
+                    <label for="tel" class="form-label">telefono:</label>
+                    <input type="number" name="tel" id="tel" class="form-control" placeholder="011 1243 4567">
+                </fieldset>
+                <fieldset>
+                    <label for="mascota" class="form-label">Mascota:</label>
+                    <select name="mascota" id="mascota" class="form-control">
+                        <option value="gato">Gato</option>
+                        <option value="perro">Perro</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <label for="nombreMascota" class="form-label">Su nombre:</label>
+                    <input type="text" name="nombreMascota" class="form-control" id="nombreMascota" placeholder="Michifuz">
+                </fieldset>
+                <fieldset>
+                    <label for="name" class="form-label">En caso de otro, cual?</label>
+                    <input type="text" name="name" class="form-control form-label" id="name" placeholder="Mascota">
+                </fieldset>
+                <fieldset>
+                    <textarea name="coment" id="" cols="30" rows="10" class="form-control form-label"></textarea>
+                </fieldset>
+                <button v-on:click="contact()" type="submit" class="border border-2 border-primary rounded-3 btn btn-primary mb-2 submit">Enviar</button>
+            </form>
+
+        </main>
+        <!--NAV-->
+
+
+        <!--MAPA-->
+        <div id="modal1" class="modalmask">
+            <div class="modalbox movedown">
+                <a href="#close" title="Close" class="close">X</a>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.698031802572!2d-58.4304098!3d-34.6117966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca429815227f%3A0x5d302e497c2cda87!2sR%C3%ADo%20de%20Janeiro%20300%2C%20C1405CCB%20CABA!5e0!3m2!1ses!2sar!4v1663347925673!5m2!1ses!2sar"
+                    class="mapa" id="caballito"></iframe>
+            </div>
+        </div>
+        <!--FOOTER-->
+        <footer class="bg-warning d-flex justify-content-between align-items-center gap-1 p-2">
+            <!-- <img src="./img/logo.png" alt="Logo VikingCat" style="width:70px;" class="rounded-pill"> -->
+            <nav class="nav redes d-flex ">
+                <a class="nav-link" href="https://www.facebook.com" target="_blank"><img
+                        src="./img/facebook_pet.shop.png" class="nav-link-img" alt="Logo de Facebook"
+                        class="fbLogo"></a>
+                <a class="nav-link" href="https://www.instagram.com" target="_blank"><img
+                        src="./img/instagram_pet.shop.png" class="nav-link-img" alt="" class="igLogo"></a>
+                <a class="nav-link" href="https://www.whatsapp.com" target="_blank"><img
+                        src="./img/whatsapp_pet.shop.png" class="nav-link-img" alt="" class="wsLogo"></a>
+            </nav>
+            <p class="text-muted">VikingCat® marca registrada</p>
+            <fieldset class="d-flex gap-2">
+                <label for="email">Suscribite:</label>
+                <input  type="email" name="email" id="email" class="form-control mb-2" placeholder="petshop@vikingcat.com">
+            </fieldset>
+        </footer>
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
